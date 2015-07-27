@@ -8,7 +8,12 @@ repositories {
     mavenCentral()
 }
 dependencies {
+compile fileTree('lib')
 compile('log4j:log4j:1.2.17'){
 	transitive=false
 	}
+	
+	
+//test dependencies
+testCompile('org.codehaus.groovy:groovy-all:1.8.6')	
 }
