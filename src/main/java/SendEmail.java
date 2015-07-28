@@ -1,4 +1,3 @@
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,36 +15,38 @@ import javax.mail.internet.MimeMessage;
 public class SendEmail {
 
 	public boolean sendMail(String to) {
-		
-		
+
 		Boolean bool = false;
-		InputStream input=null;
+		InputStream input = null;
 		final String from, username, password, host, port;
 		Properties props = new Properties();
 
 		try {
-			
-			//loading config.property file
+
+			// loading config.property file
 			input = new FileInputStream("src/main/resources/config.properties");
 			props.load(input);
-			
-			//reading values from config file
+
+			// reading values from config file
 			from = props.getProperty("sender");
 			username = props.getProperty("username");
 			password = props.getProperty("password");
 			host = props.getProperty("host");
 			port = props.getProperty("port");
-			
-			//other smtp properties set up
-			
+
+			// other smtp properties set up
+
 			props.put("mail.smtp.auth", "true");
 			props.put("mail.smtp.starttls.enable", "true");
 			props.put("mail.smtp.host", host);
 			props.put("mail.smtp.port", port);
+
+			// Get the Session object.
 			Session session = Session.getInstance(props,
 					new javax.mail.Authenticator() {
 						protected PasswordAuthentication getPasswordAuthentication() {
-							return new PasswordAuthentication(username, password);
+							return new PasswordAuthentication(username,
+									password);
 						}
 					});
 
@@ -64,15 +65,15 @@ public class SendEmail {
 				message.setSubject("Testing Subject");
 
 				// Now set the actual message
-				message.setText("Hi, this is sample for to check send "
+				message.setText("Hi there, this is sample for to check send "
 						+ "email using JavaMailAPI ");
 
 				// Send message
 				Transport.send(message);
 
 				System.out.println("Sent message successfully....");
-				
-				bool=true;
+
+				bool = true;
 
 			} catch (MessagingException e) {
 				throw new RuntimeException(e);
@@ -84,9 +85,8 @@ public class SendEmail {
 
 		// props.put("mail.smtp.debug", "true");
 
-		// Get the Session object.
 		return bool;
-		
+
 	}
 
 	public static void main(String[] args) {
