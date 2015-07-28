@@ -7,6 +7,19 @@ apply plugin: 'eclipse-wtp'
 repositories {
     mavenCentral()
 }
+
+SourceSets {
+    main {
+        java {
+            srcDir 'src/model'
+        }
+    }
+}
+
+dependencies {
+    runtime files('lib/mail.jar')
+    runtime fileTree(dir: 'lib', include: '*.jar')
+} 
 dependencies {
 compile('log4j:log4j:1.2.17'){
 	transitive=false
