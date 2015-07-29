@@ -14,18 +14,15 @@ import javax.mail.internet.MimeMessage;
 
 public class SendEmail {
 
-	public boolean sendMail(String to) throws IOException {
+	public boolean sendMail(String to ) throws IOException {
 
 		Boolean bool = false;
-		InputStream input = null;
+		
 		final String from, username, password;
-		Properties props = new Properties();
+		EmailGetProperty mailProp=new EmailGetProperty();
+		Properties props = mailProp.getProp();
 
-		try {
-
-			// loading config.property file
-			input = new FileInputStream("src/main/resources/config.properties");
-			props.load(input);
+		
 
 			// reading values from config file
 			from = props.getProperty("sender");
@@ -57,7 +54,7 @@ public class SendEmail {
 				message.setSubject("Testing Subject");
 
 				// Now set the actual message
-				message.setText("Hi there, this is sample for to check send "
+				message.setText("Hi Globytes, this is sample for to check send "
 						+ "email using JavaMailAPI ");
 
 				// Send message
@@ -70,36 +67,23 @@ public class SendEmail {
 			} catch (MessagingException e) {
 				throw new RuntimeException(e);
 			}
+			return bool;
+		} 
+			
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		
-		finally
-		{
-			input.close();
-		}
 
-		// props.put("mail.smtp.debug", "true");
 
-		return bool;
 
-	}
-
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException{
 		// Recipient's email ID needs to be mentioned.
 		Scanner in = new Scanner(System.in);
 		System.out.println("Enter recipient mail id");
 		String to = in.nextLine();
 		SendEmail mail = new SendEmail();
-		try
-		{
-			mail.sendMail(to);
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
+		
+		mail.sendMail(to);
+		
 		
 
 		// Sender's email ID needs to be mentioned
