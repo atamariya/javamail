@@ -31,25 +31,14 @@ public class SendEmailTest {
 	}
 
 	@Test
-<<<<<<< HEAD
-	public void testSendMail() {
-		
-		Boolean bool=false;
-		try
-		{
-			bool=mail.sendMail("amrit.adheesh@globallogic.com");
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
-=======
+
+	
 	public void testSendMail() throws IOException {
 		Boolean bool=false;
 		
 		bool=mail.sendMail("amrit.adheesh@globallogic.com");
 		
->>>>>>> 78c6b91e85d84a39c3c49d7ae8459461e7c42ca3
+
 		
 		assertEquals(true,bool);
 	}
