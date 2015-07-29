@@ -14,29 +14,38 @@ import javax.mail.internet.MimeMessage;
 
 public class SendEmail {
 
+<<<<<<< HEAD
 	public boolean sendMail(String to) throws IOException{
 
 		Boolean bool = false;
 		InputStream input = null;
 		final String from, username, password;
 		Properties props = new Properties();
+=======
+	public boolean sendMail(String to ) throws IOException {
 
-		try {
+		Boolean bool = false;
+		
+		final String from, username, password;
+		EmailGetProperty mailProp=new EmailGetProperty();
+		Properties props = mailProp.getProp();
+>>>>>>> 78c6b91e85d84a39c3c49d7ae8459461e7c42ca3
 
-			// loading config.property file
-			input = new FileInputStream("src/main/resources/config.properties");
-			props.load(input);
+		
 
 			// reading values from config.property file
 			from = props.getProperty("sender");
 			username = props.getProperty("username");
 			password = props.getProperty("password");
 			
+<<<<<<< HEAD
 			System.out.println("reading SMTP server details from property file");
 			
 			
 			//System.out.println(props);
 			
+=======
+>>>>>>> 78c6b91e85d84a39c3c49d7ae8459461e7c42ca3
 
 			// Get the Session object.
 			Session session = Session.getInstance(props,
@@ -62,7 +71,11 @@ public class SendEmail {
 				message.setSubject("Testing Subject");
 
 				// Now set the actual message
+<<<<<<< HEAD
 				message.setText("Hello Globytes, this is sample for to check send "
+=======
+				message.setText("Hi Globytes, this is sample for to check send "
+>>>>>>> 78c6b91e85d84a39c3c49d7ae8459461e7c42ca3
 						+ "email using JavaMailAPI ");
 
 				// Send message
@@ -75,7 +88,11 @@ public class SendEmail {
 			} catch (MessagingException e) {
 				throw new RuntimeException(e);
 			}
+			return bool;
+		} 
+			
 
+<<<<<<< HEAD
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -87,17 +104,19 @@ public class SendEmail {
 		{
 			input.close();
 		}
+=======
+		
 
-		return bool;
+>>>>>>> 78c6b91e85d84a39c3c49d7ae8459461e7c42ca3
 
-	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException{
 		// Recipient's email ID needs to be mentioned.
 		Scanner in = new Scanner(System.in);
 		System.out.println("Enter recipient mail id");
 		String to = in.nextLine();
 		SendEmail mail = new SendEmail();
+<<<<<<< HEAD
 		try
 		{
 			mail.sendMail(to);
@@ -106,6 +125,11 @@ public class SendEmail {
 		{
 			e.printStackTrace();
 		}
+=======
+		
+		mail.sendMail(to);
+		
+>>>>>>> 78c6b91e85d84a39c3c49d7ae8459461e7c42ca3
 		
 
 		// Sender's email ID needs to be mentioned
