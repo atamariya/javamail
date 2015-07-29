@@ -1,6 +1,6 @@
-import java.io.FileInputStream;
+
 import java.io.IOException;
-import java.io.InputStream;
+
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -24,7 +24,7 @@ public class SendEmail {
 
 		
 
-			// reading values from config file
+			// reading values from config.property file
 			from = props.getProperty("sender");
 			username = props.getProperty("username");
 			password = props.getProperty("password");
@@ -83,6 +83,7 @@ public class SendEmail {
 		SendEmail mail = new SendEmail();
 		
 		mail.sendMail(to);
+		in.close();
 		
 		
 
