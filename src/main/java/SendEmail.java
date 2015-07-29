@@ -14,11 +14,11 @@ import javax.mail.internet.MimeMessage;
 
 public class SendEmail {
 
-	public boolean sendMail(String to) {
+	public boolean sendMail(String to) throws IOException {
 
 		Boolean bool = false;
 		InputStream input = null;
-		final String from, username, password, host, port;
+		final String from, username, password;
 		Properties props = new Properties();
 
 		try {
@@ -31,15 +31,7 @@ public class SendEmail {
 			from = props.getProperty("sender");
 			username = props.getProperty("username");
 			password = props.getProperty("password");
-			host = props.getProperty("host");
-			port = props.getProperty("port");
-
-			// other smtp properties set up
-
-			props.put("mail.smtp.auth", "true");
-			props.put("mail.smtp.starttls.enable", "true");
-			props.put("mail.smtp.host", host);
-			props.put("mail.smtp.port", port);
+			
 
 			// Get the Session object.
 			Session session = Session.getInstance(props,
@@ -82,6 +74,11 @@ public class SendEmail {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		finally
+		{
+			input.close();
+		}
 
 		// props.put("mail.smtp.debug", "true");
 
@@ -95,7 +92,15 @@ public class SendEmail {
 		System.out.println("Enter recipient mail id");
 		String to = in.nextLine();
 		SendEmail mail = new SendEmail();
-		mail.sendMail(to);
+		try
+		{
+			mail.sendMail(to);
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+		
 
 		// Sender's email ID needs to be mentioned
 

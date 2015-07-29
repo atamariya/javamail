@@ -1,5 +1,7 @@
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -29,8 +31,12 @@ public class SendEmailTest {
 	}
 
 	@Test
-	public void testSendMail() {
-		Boolean bool=mail.sendMail("amrit.adheesh@globallogic.com");
+	public void testSendMail() throws IOException {
+		Boolean bool=false;
+		
+		bool=mail.sendMail("amrit.adheesh@globallogic.com");
+		
+		
 		assertEquals(true,bool);
 	}
 
