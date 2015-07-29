@@ -14,11 +14,11 @@ import javax.mail.internet.MimeMessage;
 
 public class SendEmail {
 
-	public boolean sendMail(String to) {
+	public boolean sendMail(String to) throws IOException{
 
 		Boolean bool = false;
 		InputStream input = null;
-		final String from, username, password, host, port;
+		final String from, username, password;
 		Properties props = new Properties();
 
 		try {
@@ -27,19 +27,16 @@ public class SendEmail {
 			input = new FileInputStream("src/main/resources/config.properties");
 			props.load(input);
 
-			// reading values from config file
+			// reading values from config.property file
 			from = props.getProperty("sender");
 			username = props.getProperty("username");
 			password = props.getProperty("password");
-			host = props.getProperty("host");
-			port = props.getProperty("port");
-
-			// other smtp properties set up
-
-			props.put("mail.smtp.auth", "true");
-			props.put("mail.smtp.starttls.enable", "true");
-			props.put("mail.smtp.host", host);
-			props.put("mail.smtp.port", port);
+			
+			System.out.println("reading SMTP server details from property file");
+			
+			
+			//System.out.println(props);
+			
 
 			// Get the Session object.
 			Session session = Session.getInstance(props,
@@ -65,7 +62,7 @@ public class SendEmail {
 				message.setSubject("Testing Subject");
 
 				// Now set the actual message
-				message.setText("Hi there, this is sample for to check send "
+				message.setText("Hello Globytes, this is sample for to check send "
 						+ "email using JavaMailAPI ");
 
 				// Send message
@@ -82,8 +79,14 @@ public class SendEmail {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 
 		// props.put("mail.smtp.debug", "true");
+		
+		finally
+		{
+			input.close();
+		}
 
 		return bool;
 
@@ -95,7 +98,15 @@ public class SendEmail {
 		System.out.println("Enter recipient mail id");
 		String to = in.nextLine();
 		SendEmail mail = new SendEmail();
-		mail.sendMail(to);
+		try
+		{
+			mail.sendMail(to);
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+		
 
 		// Sender's email ID needs to be mentioned
 
