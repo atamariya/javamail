@@ -1,4 +1,4 @@
-import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -12,10 +12,13 @@ public class EmailGetProperty {
 		try {
 
 			// loading config.property file
-			input = new FileInputStream("src/main/resources/config.properties");
+			input = getClass().getClassLoader().getResourceAsStream("config.properties");
 			if (input != null) {
 				props.load(input);
 
+			}
+			else{
+				throw new FileNotFoundException("property file not found");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

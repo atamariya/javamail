@@ -1,6 +1,6 @@
-import java.io.FileInputStream;
+
 import java.io.IOException;
-import java.io.InputStream;
+
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -113,6 +113,7 @@ public class SendEmail {
 
 		
 		mail.sendMail(to);
+		in.close();
 		
 
 		
