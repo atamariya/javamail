@@ -21,14 +21,14 @@ public class SendEmail {
 
 
 	public boolean sendMail(String to,String subject,String msg) throws IOException {
-		Logger logger=Logger.getLogger(SendEmail.class.getName());
+		
 
 		Boolean bool = false;
 		
 		final String from, username, password;
 		EmailGetProperty mailProp=new EmailGetProperty();
 		Properties props = mailProp.getProp();
-
+		Logger logger=Logger.getLogger(SendEmail.class.getName());
 
 		
 
