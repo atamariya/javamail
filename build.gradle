@@ -7,6 +7,8 @@ apply plugin: 'eclipse-wtp'
 repositories {
     mavenCentral()
 }
+
+
 dependencies {
 compile fileTree('lib')
 compile('log4j:log4j:1.2.17'){
@@ -14,6 +16,6 @@ compile('log4j:log4j:1.2.17'){
 	}
 compile('com.mashape.unirest:unirest-java:1.4.6')
 	
-//test dependencies
+
 testCompile('junit:junit:4.11')	
 }
