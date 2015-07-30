@@ -1,6 +1,7 @@
 package com.poc.sms;
 
 import java.io.IOException;
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.smslib.AGateway;
@@ -10,6 +11,7 @@ import org.smslib.Service;
 import org.smslib.TimeoutException;
 import org.smslib.http.BulkSmsHTTPGateway;
 
+import com.poc.email.EmailGetProperty;
 import com.poc.sms.validator.NumberValidator;
 
 public class SMSSender {
@@ -46,11 +48,13 @@ public class SMSSender {
 
 	/**
 	 * Builds the BulkSMS gateway
+	 * @throws IOException 
 	 */
-	private AGateway buildGateway() {
-		// Ideally the password ought to be read from a properties file
+	private AGateway buildGateway() throws IOException {
+		EmailGetProperty mailProp=new EmailGetProperty();
+		Properties props = mailProp.getProp();
 		BulkSmsHTTPGateway bulkSmsHTTPGateway = new BulkSmsHTTPGateway(
-				"bulksms.http.1", "a_chandrasekaran", "sachin100");
+				"bulksms.http.1", props.getProperty("bulk2sms.uname"), props.getProperty("bulk2sms.password"));
 		bulkSmsHTTPGateway.setOutbound(true);
 		return bulkSmsHTTPGateway;
 	}
