@@ -4,10 +4,8 @@ import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.smslib.OutboundMessage;
 import org.smslib.SMSLibException;
 import org.smslib.TimeoutException;
-import org.smslib.http.BulkSmsHTTPGateway;
 import static org.junit.Assert.*;
 
 public class SMSSenderTest {
@@ -17,22 +15,6 @@ public class SMSSenderTest {
 	@Before
 	public void setUp() throws Exception {
 		smsSender = new SMSSender();
-	}
-	
-	@Test
-	public void testbuildGateway(){
-	
-		BulkSmsHTTPGateway smsHTTPGateway=(BulkSmsHTTPGateway)smsSender.buildGateway();
-		assertEquals(smsHTTPGateway.isOutbound(),true);
-		assert(smsHTTPGateway!=null);
-	}
-	
-	@Test
-	public void testCreateMessage(){
-	
-		OutboundMessage message=smsSender.createMessage("+919945800955", "Hi!!!!");
-		assertEquals(message.getText(), "Hi!!!!");
-		assertEquals(message.getRecipient(), "+919945800955");
 	}
 	
 	@Test
