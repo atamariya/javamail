@@ -34,12 +34,15 @@ public class SendEmailTest {
 
 	
 	public void testSendMail() throws IOException {
+		
 		Boolean bool=false;
 		
-		bool=mail.sendMail("amrit.adheesh@globallogic.com");
+		bool=mail.sendMail("amrit.adheesh@globallogic.com","Test Mail","Hi Globytes,"+'\n'+'\n'+'\n'+ "this is sample for to check send "
+
+						+ "email using JavaMailAPI. "+'\n'+'\n'+'\n'+"Thanks & Regrads"+'\n'+'\n'+"Amrit Adheesh");
+		
 		
 
-		
 		assertEquals(true,bool);
 	}
 

@@ -3,10 +3,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.Scanner;
 
-
-
 import java.util.logging.Logger;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -22,7 +19,7 @@ public class SendEmail {
 
 
 
-	public boolean sendMail(String to) throws IOException {
+	public boolean sendMail(String to,String subject,String msg) throws IOException {
 		Logger logger=Logger.getLogger(SendEmail.class.getName());
 
 		Boolean bool = false;
@@ -69,14 +66,14 @@ public class SendEmail {
 						InternetAddress.parse(to));
 
 				// Set Subject: header field
-				MessageFormat msg=new MessageFormat();
-				message.setSubject(msg.getSubject());
+				
+				message.setSubject(subject);
 
 				// Now set the actual message
 
 				
 				
-				message.setText(msg.getText());
+				message.setText(msg);
 
 				// Send message
 				Transport.send(message);
@@ -107,18 +104,22 @@ public class SendEmail {
 		System.out.println("Enter recipient mail id");
 		String to = in.nextLine();
 		SendEmail mail = new SendEmail();
+		String sub="Test mail";
+		String msg="Hi Globytes,"+'\n'+'\n'+'\n'+ "this is sample for to check send "
 
-		try
+						+ "email using JavaMailAPI. "+'\n'+'\n'+'\n'+'\n'+"Thanks & Regrads"+'\n'+'\n'+"Amrit Adheesh";
+
+		/*try
 		{
-			mail.sendMail(to);
+			mail.sendMail(to,sub,msg);
 		}
 		catch(IOException e)
 		{
 			e.printStackTrace();
-		}
+		}*/
 
 		
-		mail.sendMail(to);
+		mail.sendMail(to,sub,msg);
 		in.close();
 		
 
